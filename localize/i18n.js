@@ -1,25 +1,31 @@
 const LOCALS = {
     ru: {
-        app: 'Конвертер валют',
+        app: 'Конвертер',
         setting: 'Настройки',
+        currency: 'Валюты',
+        currentValue: 'Текущая валюта',
         back: 'Назад',
         loading: 'Загрузка...',
         save: 'Сохранить',
+        lang: 'Язык',
         valuteEmpty: 'Необходимо добавить валюты для дальнейшен конвертации',
         inputHintPrice: 'Обменный курс',
         InputHintType: 'Имя валюты',
         errorFull: 'Нельзя добавлять более %val% валют'
     },
     en: {
-        app: 'Currency Converter',
+        app: 'Converter',
         setting: 'Settings',
+        currency: 'Currencies',
+        currentValue: 'Current currency',
         back: 'Back',
         loading: 'Loading...',
         save: 'Save',
+        lang: 'Language',
         valuteEmpty: 'Please, add a currency',
         inputHintPrice: 'Exchange rate',
         InputHintType: 'Name',
-        errorFull: 'You cann\'t add more than %val% currencies'
+        errorFull: 'You can not add more than %val% currencies'
     }
 };
 

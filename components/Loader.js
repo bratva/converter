@@ -3,7 +3,6 @@
 var React = require('react-native');
 var {
     StyleSheet,
-    Text,
     ActivityIndicatorIOS,
     View,
     } = React;
@@ -17,9 +16,6 @@ var Loader = React.createClass({
                     color="#F44336"
                     size="large"
                 />
-                <Text style={styles.title}>
-                    Загрузка...
-                </Text>
             </View>
         );
     }
@@ -34,10 +30,6 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
 
-    },
-    title: {
-        color: '#D32F2F',
-        fontSize: 16
     }
 });
 

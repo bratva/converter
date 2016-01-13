@@ -11,11 +11,13 @@ var {
 var HeaderComponent = require('./Header');
 var LoaderComponent = require('./Loader');
 
-var converter = React.createClass({
+var i18n = require('../localize/i18n');
+
+var ConverterView = React.createClass({
 
     render() {
         let {value} = this.state;
-        let {loaded, onPressSetting, name} = this.props;
+        let {loaded, onPressSetting, onPressCurrency, name, language} = this.props;
 
         if (!loaded) {
             return (<LoaderComponent />);
@@ -23,11 +25,11 @@ var converter = React.createClass({
 
         return (
             <View style={styles.layout}>
-                <HeaderComponent onPressSetting={onPressSetting} name={name}/>
+                <HeaderComponent onPressCurrency={onPressCurrency} name={name} onPressSetting={onPressSetting} language={language}/>
 
                 <View style={styles.container}>
                     <View style={styles.inputBox}>
-                        <Text style={styles.inputLabel}>Текущая валюта:</Text>
+                        <Text style={styles.inputLabel}>{i18n('currentValue', this.props.language)}</Text>
                         <TextInput
                             style={styles.input}
                             onChangeText={this._changeVal}
@@ -118,4 +120,4 @@ var styles = StyleSheet.create({
     }
 });
 
-module.exports = converter;
+module.exports = ConverterView;
