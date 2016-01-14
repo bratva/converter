@@ -37,6 +37,10 @@ var app = React.createClass({
                 this.setState({currency: currency.data})
             }
 
+            if (currency && currency.mainCurrency) {
+                this.setState({mainCurrency: currency.mainCurrency})
+            }
+
             this.setState({loaded: true});
         });
 
@@ -54,6 +58,7 @@ var app = React.createClass({
     getInitialState() {
         return {
             currency: [],
+            mainCurrency: 'Рубль',
             language: 'ru',
             loaded: false
         };
@@ -70,6 +75,7 @@ var app = React.createClass({
                             nav.pop();
                         }}
                         currency={this.state.currency}
+                        mainCurrency={this.state.mainCurrency}
                         language={this.state.language}
                         onUpdateCurrency={this._updateCurrency}
                         loaded={this.state.loaded}
@@ -104,6 +110,7 @@ var app = React.createClass({
                         navigator={nav}
                         language={this.state.language}
                         currency={this.state.currency}
+                        mainCurrency={this.state.mainCurrency}
                         loaded={this.state.loaded}
                     />
                 );
@@ -118,7 +125,8 @@ var app = React.createClass({
         }).then((currency) => {
             this.setState({
                 loaded: true,
-                currency: currency.data
+                currency: currency.data,
+                mainCurrency: currency.mainCurrency
             });
         })
     },

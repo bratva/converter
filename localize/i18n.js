@@ -11,6 +11,7 @@ const LOCALS = {
         valuteEmpty: 'Необходимо добавить валюты для дальнейшен конвертации',
         inputHintPrice: 'Обменный курс',
         InputHintType: 'Имя валюты',
+        inputHintMainCurrency: 'Основная валюта',
         errorFull: 'Нельзя добавлять более %val% валют'
     },
     en: {
@@ -25,6 +26,7 @@ const LOCALS = {
         valuteEmpty: 'Please, add a currency',
         inputHintPrice: 'Exchange rate',
         InputHintType: 'Name',
+        inputHintMainCurrency: 'Main currency',
         errorFull: 'You can not add more than %val% currencies'
     }
 };

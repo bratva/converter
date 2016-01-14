@@ -18,7 +18,6 @@ var Header = React.createClass({
                 <Text style={styles.title}>
                     {this.props.name}
                 </Text>
-                {this._renderCurrencyButton()}
                 {this._renderSettingButton()}
             </View>
         );
@@ -35,21 +34,6 @@ var Header = React.createClass({
                 underlayColor="#B5B5B5"
                 onPress={this.props.onPressBack}>
                 <Text style={styles.buttonText}>{i18n('back', this.props.language)}</Text>
-            </TouchableHighlight>
-        )
-    },
-
-    _renderCurrencyButton() {
-        if (!this.props.onPressCurrency) {
-            return null;
-        }
-
-        return (
-            <TouchableHighlight
-                style={styles.setting}
-                underlayColor="#B5B5B5"
-                onPress={this.props.onPressCurrency}>
-                <Text style={styles.buttonText}>{i18n('currency', this.props.language)}</Text>
             </TouchableHighlight>
         )
     },

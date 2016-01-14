@@ -5,7 +5,8 @@ var {
     StyleSheet,
     Text,
     View,
-    TextInput
+    TextInput,
+    TouchableHighlight
     } = React;
 
 var HeaderComponent = require('./Header');
@@ -17,7 +18,7 @@ var ConverterView = React.createClass({
 
     render() {
         let {value} = this.state;
-        let {loaded, onPressSetting, onPressCurrency, name, language} = this.props;
+        let {loaded, onPressSetting, onPressCurrency, name, language, mainCurrency} = this.props;
 
         if (!loaded) {
             return (<LoaderComponent />);
@@ -25,20 +26,27 @@ var ConverterView = React.createClass({
 
         return (
             <View style={styles.layout}>
-                <HeaderComponent onPressCurrency={onPressCurrency} name={name} onPressSetting={onPressSetting} language={language}/>
+                <HeaderComponent name={name} onPressSetting={onPressSetting} language={language}/>
 
                 <View style={styles.container}>
                     <View style={styles.inputBox}>
-                        <Text style={styles.inputLabel}>{i18n('currentValue', this.props.language)}</Text>
+                        <Text style={styles.inputLabel}>{i18n('currentValue', this.props.language)} {mainCurrency}</Text>
                         <TextInput
                             style={styles.input}
                             onChangeText={this._changeVal}
-                            placeholder="Рубль"
+                            placeholder={mainCurrency}
                             value={String(value || '')}
                         />
                     </View>
 
                     {this._renderResults()}
+                </View>
+                <View style={styles.editCurrencyBtn}>
+                    <TouchableHighlight
+                        style={styles.currencyBtn}
+                        onPress={onPressCurrency}>
+                        <Text style={styles.currencyBtnText}>{i18n('currency', this.props.language)}</Text>
+                    </TouchableHighlight>
                 </View>
             </View>
         );
@@ -117,6 +125,23 @@ var styles = StyleSheet.create({
         color: '#fff',
         alignSelf: 'flex-start'
 
+    },
+
+    editCurrencyBtn: {
+        alignSelf: 'stretch',
+        alignItems: 'stretch'
+    },
+
+    currencyBtn: {
+        marginTop: 12,
+        padding: 12,
+        backgroundColor: '#D32F2F'
+    },
+
+    currencyBtnText: {
+        fontSize: 15,
+        textAlign: 'center',
+        color: '#fff'
     }
 });
 

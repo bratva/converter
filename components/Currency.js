@@ -21,7 +21,7 @@ var CurrencyView = React.createClass({
     componentPropsChanged(props, nextProps) {
         let clone = nextProps.currency.slice(0);
 
-        this.setState({currency: clone});
+        this.setState({currency: clone, mainCurrency: nextProps.mainCurrency});
     },
 
     componentDidMount() {
@@ -29,7 +29,7 @@ var CurrencyView = React.createClass({
     },
 
     render() {
-        let {currency} = this.state;
+        let {currency, mainCurrency} = this.state;
         let {loaded, onPressBack, name, language} = this.props;
 
         if (!loaded) {
@@ -58,20 +58,27 @@ var CurrencyView = React.createClass({
                 <HeaderComponent onPressBack={onPressBack} name={name} language={language}/>
 
                 <View style={styles.container}>
-                    {content}
+                    <TextInput
+                        style={[styles.mainCurrency]}
+                        onChangeText={this._changeMainCurrency}
+                        name='mainCurency'
+                        placeholder={i18n('inputHintMainCurrency', this.props.language)}
+                        value={mainCurrency}
+                    />
 
-                    <View style={styles.buttonBox}>
-                        <TouchableHighlight
-                            style={styles.addBtn}
-                            onPress={this._onPressAdd}>
-                            <Text style={styles.addButtonText}>+</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            style={styles.saveBtn}
-                            onPress={this._onPressSave}>
-                            <Text style={styles.addButtonText}>{i18n('save', this.props.language)}</Text>
-                        </TouchableHighlight>
-                    </View>
+                    {content}
+                </View>
+                <View style={styles.buttonBox}>
+                    <TouchableHighlight
+                        style={styles.addBtn}
+                        onPress={this._onPressAdd}>
+                        <Text style={styles.addButtonText}>+</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        style={styles.saveBtn}
+                        onPress={this._onPressSave}>
+                        <Text style={styles.addButtonText}>{i18n('save', this.props.language)}</Text>
+                    </TouchableHighlight>
                 </View>
             </View>
         );
@@ -100,6 +107,10 @@ var CurrencyView = React.createClass({
         newCurrency[findIndex][type].value = text;
 
         this.setState({currency: newCurrency});
+    },
+
+    _changeMainCurrency(text) {
+        this.setState({mainCurrency: text});
     },
 
     _renderValute(valute, index) {
@@ -161,7 +172,8 @@ var CurrencyView = React.createClass({
         ));
 
         this.props.onUpdateCurrency({
-            data: currency
+            data: currency,
+            mainCurrency: this.state.mainCurrency
         });
     },
 
@@ -184,7 +196,8 @@ var CurrencyView = React.createClass({
 
     getInitialState() {
         return {
-            currency: []
+            currency: [],
+            mainCurrency: ''
         };
     }
 });
@@ -222,7 +235,6 @@ var styles = StyleSheet.create({
     },
 
     saveBtn: {
-        marginTop: 12,
         padding: 12,
         backgroundColor: '#D32F2F'
     },
@@ -240,6 +252,16 @@ var styles = StyleSheet.create({
         fontSize: 15,
         paddingLeft: 10,
         paddingRight: 10
+    },
+
+    mainCurrency: {
+        height: 40,
+        borderWidth: 0.5,
+        fontSize: 18,
+        paddingLeft: 10,
+        paddingRight: 10,
+        alignSelf: 'stretch',
+        marginBottom: 12
     },
 
     inputPrice: {
@@ -260,7 +282,7 @@ var styles = StyleSheet.create({
     },
 
     addButtonText: {
-        fontSize: 22,
+        fontSize: 15,
         textAlign: 'center',
         color: '#FFF'
     },
