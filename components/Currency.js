@@ -124,6 +124,7 @@ var CurrencyView = React.createClass({
                     onChangeText={this._changeVal.bind(this, valute.id, 'price')}
                     name={valute.id}
                     placeholder={i18n('inputHintPrice', this.props.language)}
+                    keyboardType="numeric"
                     value={price.value}
                 />
                 <TextInput

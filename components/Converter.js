@@ -35,6 +35,7 @@ var ConverterView = React.createClass({
                             style={styles.input}
                             onChangeText={this._changeVal}
                             placeholder={mainCurrency}
+                            keyboardType="numeric"
                             value={String(value || '')}
                         />
                     </View>
@@ -60,9 +61,11 @@ var ConverterView = React.createClass({
         }
 
         let items = this.props.currency.map((item, index) => {
-           return (
-               <Text style={styles.result} key={index}>{item.price.value * val} {item.type.value}</Text>
-           )
+            let resVal = Number(item.price.value * val).toFixed(2);
+
+            return (
+               <Text style={styles.result} key={index}>{resVal} {item.type.value}</Text>
+            )
         });
 
         return (

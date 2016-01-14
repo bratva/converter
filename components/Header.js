@@ -30,7 +30,7 @@ var Header = React.createClass({
 
         return (
             <TouchableHighlight
-                style={styles.setting}
+                style={styles.btn}
                 underlayColor="#B5B5B5"
                 onPress={this.props.onPressBack}>
                 <Text style={styles.buttonText}>{i18n('back', this.props.language)}</Text>
@@ -45,7 +45,7 @@ var Header = React.createClass({
 
         return (
             <TouchableHighlight
-                style={styles.setting}
+                style={styles.btn}
                 underlayColor="#B5B5B5"
                 onPress={this.props.onPressSetting}>
                 <Text style={styles.buttonText}>{i18n('setting', this.props.language)}</Text>
@@ -59,7 +59,8 @@ var styles = StyleSheet.create({
         backgroundColor: '#F44336',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 20,
+        paddingBottom: 20,
+        paddingTop: 30,
         paddingLeft: 6,
         paddingRight: 6,
         alignSelf: 'stretch',
@@ -72,6 +73,10 @@ var styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 12
+    },
+    btn: {
+        justifyContent: 'center',
+        height: 30
     }
 
 });
