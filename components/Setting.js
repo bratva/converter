@@ -5,14 +5,17 @@ var {
     StyleSheet,
     View,
     PickerIOS,
+    TouchableHighlight,
+    Text
     } = React;
 
 var PickerItemIOS = PickerIOS.Item;
 
 var HeaderComponent = require('./Header');
-var LoaderComponent = require('./Loader');
 
 const LANGUAGES = [{name: 'Русский', value: 'ru'}, {name: 'English', value: 'en'}];
+
+var i18n = require('../localize/i18n');
 
 var SettingView = React.createClass({
 
@@ -25,7 +28,7 @@ var SettingView = React.createClass({
     },
 
     render() {
-        let {onPressBack, name} = this.props;
+        let {onPressBack, name, onPressHelp} = this.props;
 
         let list = LANGUAGES.map((item) => (
             <PickerItemIOS
@@ -50,6 +53,13 @@ var SettingView = React.createClass({
                         >
                             {list}
                         </PickerIOS>
+                    </View>
+                    <View style={styles.editCurrencyBtn}>
+                        <TouchableHighlight
+                            style={styles.helpBtn}
+                            onPress={onPressHelp}>
+                            <Text style={styles.helpBtnText}>{i18n('help', this.state.language)}</Text>
+                        </TouchableHighlight>
                     </View>
                 </View>
             </View>
@@ -79,9 +89,7 @@ var styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignSelf: 'stretch',
         alignItems: 'stretch',
-        padding: 20,
-        paddingLeft: 6,
-        paddingRight: 6
+        paddingTop: 20
     },
 
     buttonBox: {
@@ -109,7 +117,20 @@ var styles = StyleSheet.create({
         fontSize: 22,
         textAlign: 'center',
         color: '#FFF'
+    },
+
+    helpBtn: {
+        marginTop: 12,
+        padding: 12,
+        backgroundColor: '#607D8B'
+    },
+
+    helpBtnText: {
+        fontSize: 15,
+        textAlign: 'center',
+        color: '#fff'
     }
+
 });
 
 module.exports = SettingView;

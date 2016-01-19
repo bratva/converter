@@ -59,8 +59,8 @@ var styles = StyleSheet.create({
         backgroundColor: '#F44336',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingBottom: 20,
-        paddingTop: 30,
+        paddingBottom: 5,
+        paddingTop: 20,
         paddingLeft: 6,
         paddingRight: 6,
         alignSelf: 'stretch',
@@ -76,7 +76,7 @@ var styles = StyleSheet.create({
     },
     btn: {
         justifyContent: 'center',
-        height: 30
+        height: 50
     }
 
 });

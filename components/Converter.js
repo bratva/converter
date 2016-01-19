@@ -18,7 +18,7 @@ var ConverterView = React.createClass({
 
     render() {
         let {value} = this.state;
-        let {loaded, onPressSetting, onPressCurrency, name, language, mainCurrency} = this.props;
+        let {loaded, onPressSetting, onPressCurrency, name, language, mainCurrency, onPressHelp} = this.props;
 
         if (!loaded) {
             return (<LoaderComponent />);
@@ -44,6 +44,11 @@ var ConverterView = React.createClass({
                 </View>
                 <View style={styles.editCurrencyBtn}>
                     <TouchableHighlight
+                        style={styles.helpBtn}
+                        onPress={onPressHelp}>
+                        <Text style={styles.helpBtnText}>{i18n('help', this.props.language)}</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight
                         style={styles.currencyBtn}
                         onPress={onPressCurrency}>
                         <Text style={styles.currencyBtnText}>{i18n('currency', this.props.language)}</Text>
@@ -61,7 +66,7 @@ var ConverterView = React.createClass({
         }
 
         let items = this.props.currency.map((item, index) => {
-            let resVal = Number(item.price.value * val).toFixed(2);
+            let resVal = Number(Number(item.price.value.replace(',', '.')) * val).toFixed(2);
 
             return (
                <Text style={styles.result} key={index}>{resVal} {item.type.value}</Text>
@@ -76,7 +81,7 @@ var ConverterView = React.createClass({
     },
 
     _changeVal(value) {
-        value = Number(value);
+        value = Number(value.replace(',', '.'));
 
         if (isNaN(value)) {
             value = 0;
@@ -145,6 +150,19 @@ var styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         color: '#fff'
+    },
+
+    helpBtn: {
+        marginTop: 12,
+        padding: 12,
+        backgroundColor: '#FFF',
+        alignSelf: 'flex-end'
+    },
+
+    helpBtnText: {
+        fontSize: 12,
+        textAlign: 'center',
+        color: '#607D8B'
     }
 });
 

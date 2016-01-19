@@ -12,6 +12,7 @@ var store = require('react-native-simple-store');
 var ConverterScreen = require('./components/Converter');
 var CurrencyScreen = require('./components/Currency');
 var SettingScreen = require('./components/Setting');
+var HelpScreen = require('./components/Help');
 
 var i18n = require('./localize/i18n');
 
@@ -89,8 +90,24 @@ var app = React.createClass({
                         onPressBack={() => {
                             nav.pop();
                         }}
+                        onPressHelp={() => {
+                            nav.push({
+                                id: 'help'
+                            });
+                        }}
                         language={this.state.language}
                         onUpdateLang={this._updateLanguage}
+                    />
+                );
+            case 'help':
+                return (
+                    <HelpScreen
+                        name={i18n('help', this.state.language)}
+                        navigator={nav}
+                        onPressBack={() => {
+                            nav.pop();
+                        }}
+                        language={this.state.language}
                     />
                 );
             default:
@@ -105,6 +122,11 @@ var app = React.createClass({
                         onPressSetting={() => {
                             nav.push({
                                 id: 'setting'
+                            });
+                        }}
+                        onPressHelp={() => {
+                            nav.push({
+                                id: 'help'
                             });
                         }}
                         navigator={nav}

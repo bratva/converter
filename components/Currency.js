@@ -66,6 +66,7 @@ var CurrencyView = React.createClass({
                         value={mainCurrency}
                     />
 
+                    {this._renderMainCurrencyHint(mainCurrency)}
                     {content}
                 </View>
                 <View style={styles.buttonBox}>
@@ -82,6 +83,17 @@ var CurrencyView = React.createClass({
                 </View>
             </View>
         );
+    },
+
+    _renderMainCurrencyHint: function (mainCurrency) {
+        if (!mainCurrency) {
+            return null;
+        }
+
+        return (
+            <Text style={[styles.mainCurrencyHint]}>{i18n('mainCurrencyHint', this.props.language).replace('%val%', mainCurrency)}</Text>
+        );
+
     },
 
     _getEmptyMessage() {
@@ -103,6 +115,10 @@ var CurrencyView = React.createClass({
         });
 
         let newCurrency = currency.concat();
+
+        if (type === 'price') {
+            text = text.replace(',', ',');
+        }
 
         newCurrency[findIndex][type].value = text;
 
@@ -262,6 +278,13 @@ var styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         alignSelf: 'stretch',
+        marginBottom: 12
+    },
+
+    mainCurrencyHint: {
+        fontSize: 14,
+        textAlign: 'left',
+        color: '#607D8B',
         marginBottom: 12
     },
 
